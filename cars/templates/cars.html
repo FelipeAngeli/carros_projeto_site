@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
 
@@ -11,9 +11,14 @@
 {% block content %}
 
 <body>
+
     <h1>Revenda do Zezinho</h1>
-    <h2>Carros</h2>
-    <p> Carro 1 : {{ cars.model }} </p>
+
+    {% for car in cars%}
+    <p>{{car.brand}} - {{ car.model }} - {{car.factory_year}} </p>
+
+    {% endfor %}
+
 </body>
 
 {% endblock %}
