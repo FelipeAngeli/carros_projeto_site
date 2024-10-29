@@ -112,7 +112,7 @@
   <div class="car-grid">
     {% if cars %}
       {% for car in cars %}
-        {% comment %} <a href="{% url 'car_detail' car.pk %}"> {% endcomment %}
+        <a href="{% url 'car_detail' car.pk %}"> <!-- Aqui  -->
           <div class="car-card">
             {% if car.photo %}
               <img src="{{ car.photo.url }}" alt="{{ car.model }} - {{ car.brand }}">
