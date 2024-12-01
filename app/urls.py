@@ -1,14 +1,11 @@
-
-from django.contrib import admin 
+from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from cars.views import NewCarCreateView,  CarListView, CarDetailView, CarUpdateView, CarDeleteView
-from accounts.views import register_view
-from accounts.views import login_view
-from accounts.views import logout_view
+from django.contrib.auth.decorators import login_required
 
-
+from cars.views import NewCarCreateView, CarListView, CarDetailView, CarUpdateView, CarDeleteView
+from accounts.views import register_view, login_view, logout_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,8 +13,9 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('cars/', CarListView.as_view(), name='cars_list'),
-    path('new_car/', NewCarCreateView.as_view(), name='new_car'),
-    path('cars/<int:pk>', CarDetailView.as_view(), name='car_detail'),
-    path('cars/<int:pk>/update', CarUpdateView.as_view(), name='car_update'),
-    path('cars/<int:pk>/delete', CarDeleteView.as_view(), name='car_delete'),
+    path('new_car/', login_required(NewCarCreateView.as_view()), name='new_car'),
+    path('cars/<int:pk>/', CarDetailView.as_view(), name='car_detail'),
+    path('cars/<int:pk>/update/', CarUpdateView.as_view(), name='car_update'),
+    path('cars/<int:pk>/delete/', CarDeleteView.as_view(), name='car_delete'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

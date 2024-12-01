@@ -1,7 +1,5 @@
 from django.db import models
 
-# blank=True, null=True significa que o campo nao é obrigatório
-
 
 class Brand(models.Model):
     id = models.AutoField(primary_key=True)
@@ -9,7 +7,6 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
-    
 
 class Car(models.Model):
     id = models.AutoField(primary_key=True)
